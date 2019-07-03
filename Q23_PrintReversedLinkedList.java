@@ -26,15 +26,20 @@ public class Q23_PrintReversedLinkedList {
         return tail;
     }
     
-    public static void main(String[] args) {
-        Node n1 = new Node(1);
-        Node n2 = new Node(2);
-        Node n3 = new Node(3);
-        n1.next = n2;
-        n2.next = n3;
-        System.out.println(reverse(n1));
+    public static Node reverse_ptr(Node head) {
+        Node prev = null;
+        Node curr = head;
         
+        while (curr != null) {
+            Node next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+        
+        return prev;
     }
+    
     
     private static class Node {
         Node next;
@@ -47,5 +52,15 @@ public class Q23_PrintReversedLinkedList {
             if (next == null) return String.valueOf(val);
             return String.valueOf(val) + " -> " + next.toString();
         }
+    }
+    
+    public static void main(String[] args) {
+        Node n1 = new Node(1);
+        Node n2 = new Node(2);
+        Node n3 = new Node(3);
+        n1.next = n2;
+        n2.next = n3;
+        System.out.println(reverse(n1));
+        System.out.println(reverse_ptr(n3));
     }
 }
