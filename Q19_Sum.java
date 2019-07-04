@@ -4,6 +4,7 @@ package top50_questions;
  * Q. Given two integers, write a function to sum the numbers 
  * without using any arithmetic operators.
  * 
+ * 
  * [Approach] Bit operation.
  * 
  * - XOR opr: addition
@@ -21,10 +22,28 @@ package top50_questions;
  *    ------
  *      111
  * 
+ * @see <a href = "https://leetcode.com"> LC#371. Sum of Two Integers</a>
  * @author Sunny Park
  *
  */
 public class Q19_Sum {
+    /**
+     * Wrong answer: sum(20, 30) doesn't work. 
+     * bc/ carry happens in the last opr, (sum | carry)
+     * 
+     *          10100 
+     *          11110
+     *          -----
+     *   xor:   01010
+     *   and:  101000
+     *        --------
+     *           X      <- this is the cause. 
+     *                     I should check the (carry + sum) separately. 
+     *          
+     * @param a
+     * @param b
+     * @return
+     */
     public static int sum(int a, int b) {
         int sum = a ^ b;
         int carry = (a & b) << 1;
@@ -48,7 +67,7 @@ public class Q19_Sum {
     }
      
     public static void main(String[] args) {
-        System.out.println(sum(10, 16));
+        System.out.println(sum(20, 30));
         System.out.println(sum_recursive(10, 16));
         System.out.println(sum_iterative(10, 16));
     }

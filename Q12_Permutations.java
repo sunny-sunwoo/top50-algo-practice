@@ -24,7 +24,7 @@ import java.util.List;
  * 
  */
 
-public class Q22_Permutations {
+public class Q12_Permutations {
     public static List<List<Integer>> permute(int[] nums) {
         List<List<Integer>> result = new ArrayList<>();
         permute(result, new ArrayList<>(), nums);
