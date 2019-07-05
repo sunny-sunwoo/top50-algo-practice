@@ -3,30 +3,50 @@ package top50_questions;
 import java.util.Stack;
 
 /**
- * Question: Given a stack, reverse the items 
+ * Question. Given a stack, reverse the items 
  * without creating any additional data structures.
  * 
- * [Approach] Recursion
+ * [Approach] Double Recursion
+ * 1. traverse in reverse order.
+ * 2. insert at bottom.
+ * 
+ * Note. try to draw the stack.
+ * 
+ * 
+ * [Complexity]
+ * Time complexity: O(n^2), quadratic.
+ *  - insertAtBottom: O(n)
+ *  - reverse: O(n)
+ *  
+ * Space complexity: O(2n) => O(n), not quadratic, 
+ *                   bc/ we can *free* the stack space each time while returning back.
+ *  - insertAtBottom: O(n)
+ *  - reverse: O(n)
+ * 
  * 
  * @author Sunny Park
  *
  */
 public class Q20_ReverseStack {
     public static Stack<Integer> reverse(Stack<Integer> stack) {
-        if (stack.isEmpty()) return stack;
-        int temp = stack.pop();
+        if (stack.isEmpty()) {
+            return stack;
+        }
+        
+        int tmp = stack.pop();
         reverse(stack);
-        insertAtBottom(stack, temp);
+        insertAtBottom(stack, tmp);
         return stack;
     }
     
-    private static void insertAtBottom(Stack<Integer> stack, int num) {
+    private static void insertAtBottom(Stack<Integer> stack, int x) {
         if (stack.isEmpty()) {
-            stack.push(num);
+            stack.push(x);
             return;
         }
+        
         int top = stack.pop();
-        insertAtBottom(stack, num);
+        insertAtBottom(stack, x);
         stack.push(top);
     }
     
