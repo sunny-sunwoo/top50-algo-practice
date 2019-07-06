@@ -1,5 +1,17 @@
 package top50_questions;
 
+/**
+ * Q. Given a linked list, and an input n, 
+ * write a function that returns the nth-to-last element of the linked list.
+ * 
+ * [Approach] using 2 pointers.
+ * 
+ * Time complexity: O(n), linear scan.
+ * Space complexity: O(1), just using pointers.
+ * 
+ * @author Sunny Park
+ *
+ */
 public class Q42_NthToTheLastElement {
     public static Node nthToLast(Node head, int n) {
         Node checker = head;
@@ -18,7 +30,7 @@ public class Q42_NthToTheLastElement {
     
     private static class Node {
         static int num = 1;
-        int val;
+        final int val;
         Node next;
         
         Node() {
