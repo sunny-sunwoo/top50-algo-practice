@@ -1,5 +1,7 @@
 package top50_questions;
 
+import java.util.Stack;
+
 /**
  * Q.Given a binary search tree, 
  * print out the elements of the tree in order without using recursion.
@@ -9,7 +11,9 @@ package top50_questions;
  * Time: O(n)
  * Space: O(LogN), call stack cnt = depth of the tree.
  * 
- * [Approach2] Iterator. based on the Stack ds. 
+ * [Approach2] BST Iterator. using the Stack!
+ * note. helper method to push the left to the end.
+ *  
  * Time: O(n)
  * Space: O(n), the stack size will be n/2 at max.
  * 
@@ -22,6 +26,24 @@ public class Q27_InorderTraversal {
         inorder(root.left);
         System.out.println(root);
         inorder(root.right);
+    }
+    
+    public static void inorder_stack(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<>();
+        pushLeft(stack, root);
+        while (!stack.isEmpty()) {
+            TreeNode top = stack.pop();
+            pushLeft(stack, top.right);
+            System.out.println(top);
+        }
+    }
+    
+    private static void pushLeft(Stack<TreeNode> stack, TreeNode node) {
+        if (node == null) {
+            return;
+        }
+        stack.push(node);
+        pushLeft(stack, node.left);
     }
     
     private static class TreeNode {
@@ -58,6 +80,7 @@ public class Q27_InorderTraversal {
         n6.right = n7;
         
         inorder(n4);
+        inorder_stack(n4);
         
     }
 }
