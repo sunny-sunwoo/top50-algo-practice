@@ -43,7 +43,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @author Sunny Park
  *
  */
-public class Q1_MedianOfArrays {
+public class Q01_MedianOfArrays {
     
     public static double findMedian(int[] arr1, int[] arr2) {
         checkArgument(checkNotNull(arr1).length > 0);
