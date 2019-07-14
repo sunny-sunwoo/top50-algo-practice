@@ -1,5 +1,23 @@
 package top50_questions;
 
+/**
+ *           x
+ *          / \
+ * x - x - x   x <- meeting point.
+ *          \ /
+ *           x
+ * 
+ * slow: x + y (before meeting point)
+ * fast: x + y + z + y
+ * 
+ * if there is cycle.
+ * 2 * (x + y) = x + 2y + z
+ * 
+ * x = z. 
+ * 
+ * @author Sunny Park
+ *
+ */
 public class Q38_LLCycles {
     public static boolean hasCycle(ListNode head) {
         if (head == null) return false;
