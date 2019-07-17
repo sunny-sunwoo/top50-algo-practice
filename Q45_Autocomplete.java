@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.collect.Iterables;
+
 /**
  * Write an autocomplete class that returns all dictionary words with a given prefix.
  * 
@@ -93,7 +95,7 @@ public class Q45_Autocomplete {
             if (i == word.length() - 1) {
                 curr.isWord = true;
             }
-            System.out.println("curr: " + curr.prefix + ", " + curr.counter);
+            // System.out.println("curr: " + curr.prefix + ", " + curr.counter);
         }
         
     }
@@ -137,15 +139,34 @@ public class Q45_Autocomplete {
                 result.add(child.prefix);
             }
             if (child.counter == 1) {
-                result.add(child.prefix);
+//                result.add(child.prefix); // cut at the unique prefix
+                result.add(child.prefix + compressWord(child.prefix.length(), child)); // with compressed word
                 continue;
             }
             getUniquePrefix(child, result);
         }
     }
     
+    private String compressWord(int preLen, Node node) {
+        if (node.isWord) {
+            int len = node.prefix.length();
+            int num = len - preLen - 1;
+            if (num <= 0) return "";
+            return String.valueOf(num) + node.prefix.charAt(len - 1);
+        }
+        
+        Map.Entry<Character, Node> entry = Iterables.getOnlyElement(node.children.entrySet());
+        return compressWord(preLen, entry.getValue());
+        
+//        for (Map.Entry<Character, Node> entry : node.children.entrySet()) {
+//            return compressWord(preLen, entry.getValue());
+//        }
+//        return "";
+    }
+    
     public static void main(String[] args) {
-        Q45_Autocomplete tester = new Q45_Autocomplete(Arrays.asList("dog", "dot", "ddd", "duck", "zebra"));
+        Q45_Autocomplete tester = new Q45_Autocomplete(Arrays.asList("too", "tootle", "tooklroe", "toozle", "zebra"));
+//        Q45_Autocomplete tester = new Q45_Autocomplete(Arrays.asList("dog", "dot", "ddd", "duck", "zebra"));
 //        Q45_Autocomplete tester = new Q45_Autocomplete(Arrays.asList("a", "abc", "abd", "dog", "dot", "ddd"));
         System.out.println(tester.findWordByPrefix("do"));
         System.out.println(tester.getUniquePrefix());
