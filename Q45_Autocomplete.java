@@ -96,8 +96,8 @@ public class Q45_Autocomplete {
             if (i == word.length() - 1) {
                 curr.isWord = true;
             }
-             System.out.println("curr: " + curr.prefix + ", " + curr.counter);
-             System.out.println(curr.children.size());
+             //System.out.println("curr: " + curr.prefix + ", " + curr.counter);
+             //System.out.println(curr.children.size());
         }
         
     }
