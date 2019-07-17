@@ -55,6 +55,7 @@ import com.google.common.collect.Iterables;
  *              -> add the prefix. (dog)
  *          (2) check if counter == 1 (dog, dot, zebra)
  *              -> add the prefix. (z)
+ *              -> (extra) can compress the rest. 
  *              -> continue. (bc/ no need to traverse more with zebra)
  *          (3) recursive call on the child node.
  *      
@@ -95,7 +96,8 @@ public class Q45_Autocomplete {
             if (i == word.length() - 1) {
                 curr.isWord = true;
             }
-            // System.out.println("curr: " + curr.prefix + ", " + curr.counter);
+             System.out.println("curr: " + curr.prefix + ", " + curr.counter);
+             System.out.println(curr.children.size());
         }
         
     }
@@ -118,7 +120,6 @@ public class Q45_Autocomplete {
     private void findWordByPrefix(Node node, List<String> result) {
         if (node.isWord) {
             result.add(node.prefix);
-            return;
         }
         for (Character c : node.children.keySet()) {
             findWordByPrefix(node.children.get(c), result);
@@ -139,7 +140,7 @@ public class Q45_Autocomplete {
                 result.add(child.prefix);
             }
             if (child.counter == 1) {
-//                result.add(child.prefix); // cut at the unique prefix
+                // result.add(child.prefix); // cut at the unique prefix
                 result.add(child.prefix + compressWord(child.prefix.length(), child)); // with compressed word
                 continue;
             }
@@ -155,20 +156,21 @@ public class Q45_Autocomplete {
             return String.valueOf(num) + node.prefix.charAt(len - 1);
         }
         
-        Map.Entry<Character, Node> entry = Iterables.getOnlyElement(node.children.entrySet());
+        Map.Entry<Character, Node> entry = Iterables.getOnlyElement(node.children.entrySet()); // map has only 1
         return compressWord(preLen, entry.getValue());
         
-//        for (Map.Entry<Character, Node> entry : node.children.entrySet()) {
-//            return compressWord(preLen, entry.getValue());
-//        }
-//        return "";
+        /* for (Map.Entry<Character, Node> entry : node.children.entrySet()) {
+            return compressWord(preLen, entry.getValue());
+        }
+        return "";
+        */
     }
     
     public static void main(String[] args) {
         Q45_Autocomplete tester = new Q45_Autocomplete(Arrays.asList("too", "tootle", "tooklroe", "toozle", "zebra"));
-//        Q45_Autocomplete tester = new Q45_Autocomplete(Arrays.asList("dog", "dot", "ddd", "duck", "zebra"));
-//        Q45_Autocomplete tester = new Q45_Autocomplete(Arrays.asList("a", "abc", "abd", "dog", "dot", "ddd"));
-        System.out.println(tester.findWordByPrefix("do"));
+        //Q45_Autocomplete tester = new Q45_Autocomplete(Arrays.asList("dog", "dot", "ddd", "duck", "zebra"));
+        //Q45_Autocomplete tester = new Q45_Autocomplete(Arrays.asList("a", "abc", "abd", "dog", "dot", "ddd"));
+        System.out.println(tester.findWordByPrefix("t"));
         System.out.println(tester.getUniquePrefix());
     }
     
