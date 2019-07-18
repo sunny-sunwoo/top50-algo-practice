@@ -173,6 +173,4 @@ public class Q45_Autocomplete {
         System.out.println(tester.findWordByPrefix("t"));
         System.out.println(tester.getUniquePrefix());
     }
-    
-    
 }
