@@ -35,7 +35,7 @@ import java.util.Arrays;
  * @author Sunny Park
  *
  */
-public class Q3_MatrixProduct {
+public class Q03_MatrixProduct {
     public static int findMatrixProduct(int[][] input) {
         Pair[][] memo = new Pair[input.length][input.length];
         memo[0][0] = Pair.of(input[0][0], input[0][0]) ;
