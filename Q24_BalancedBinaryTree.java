@@ -17,7 +17,6 @@ public class Q24_BalancedBinaryTree {
     private static int helper(TreeNode node) {
         if (node == null) return 0;
         
-        
         int left = helper(node.left);
         if (left == -1) return -1;
         

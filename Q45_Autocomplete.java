@@ -107,11 +107,10 @@ public class Q45_Autocomplete {
         Node curr = trie;
         for (int i = 0; i < input.length(); i++) {
             char c = input.charAt(i);
-            if (curr.children.containsKey(c)) {
-                curr = curr.children.get(c);
-            } else {
+            if (!curr.children.containsKey(c)) {
                 return result;
-            }
+            } 
+            curr = curr.children.get(c);
         }
         findWordByPrefix(curr, result);
         return result;
@@ -121,8 +120,8 @@ public class Q45_Autocomplete {
         if (node.isWord) {
             result.add(node.prefix);
         }
-        for (Character c : node.children.keySet()) {
-            findWordByPrefix(node.children.get(c), result);
+        for (Node child : node.children.values()) {
+            findWordByPrefix(child, result);
         }
     }
     

@@ -36,7 +36,6 @@ public class Q23_PrintReversedLinkedList {
             prev = curr;
             curr = next;
         }
-        
         return prev;
     }
     

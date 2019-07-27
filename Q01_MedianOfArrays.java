@@ -58,22 +58,38 @@ public class Q01_MedianOfArrays {
         return (findkth(arr1, 0, arr2, 0, left) + findkth(arr1, 0, arr2, 0, right)) / 2.0;
     }
     
+//    private static int findkth(int[] arr1, int start1, int[] arr2, int start2, int k) {
+//        if (start1 >= arr1.length) return arr2[start2 + k - 1];
+//        if (start2 >= arr2.length) return arr1[start1 + k - 1];
+//        
+//        if (k == 1) return Math.min(arr1[start1], arr2[start2]);
+//        
+//        int mid1 = Integer.MAX_VALUE;
+//        int mid2 = Integer.MAX_VALUE;
+//        
+//        mid1 = (start1 + k/2 - 1) < arr1.length ? arr1[start1 + k/2 - 1] : mid1;
+//        mid2 = (start2 + k/2 - 1) < arr2.length ? arr2[start2 + k/2 - 1] : mid2;
+//        
+//        return mid1 < mid2 ? findkth(arr1, start1 + k/2, arr2, start2, k - k/2) 
+//                : findkth(arr1, start1, arr2, start2 + k/2, k - k/2);
+//    }
+    
     private static int findkth(int[] arr1, int start1, int[] arr2, int start2, int k) {
+        //1. s1, s2 bound check
+        //2. k == 1?
+        //3. binary search with checking.
+        
         if (start1 >= arr1.length) return arr2[start2 + k - 1];
         if (start2 >= arr2.length) return arr1[start1 + k - 1];
         
         if (k == 1) return Math.min(arr1[start1], arr2[start2]);
         
-        int mid1 = Integer.MAX_VALUE;
-        int mid2 = Integer.MAX_VALUE;
+        int mid1 = start1 + k/2 - 1 < arr1.length ? arr1[start1 + k/2 - 1] : Integer.MAX_VALUE;
+        int mid2 = start2 + k/2 - 1 < arr2.length ? arr2[start2 + k/2 - 1] : Integer.MAX_VALUE;
         
-        mid1 = (start1 + k/2 - 1) < arr1.length ? arr1[start1 + k/2 - 1] : mid1;
-        mid2 = (start2 + k/2 - 1) < arr2.length ? arr2[start2 + k/2 - 1] : mid2;
-        
-        return mid1 < mid2 ? findkth(arr1, start1 + k/2, arr2, start2, k - k/2) 
+        return mid1 < mid2 ? findkth(arr1, start1 + k/2, arr2, start2, k - k/2)
                 : findkth(arr1, start1, arr2, start2 + k/2, k - k/2);
     }
-    
     public static void main(String[] args) {
         int[] arr1 = {1, 3, 5};
         int[] arr2 = {2, 4, 6};
