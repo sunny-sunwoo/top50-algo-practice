@@ -18,11 +18,27 @@ unless the entire array is full.
     stacks.pop(2) = 11;
 
  * [Approach] 
- * 1. instance fields
+ * 1. set instance fields
  *  int[] topOfStack - keep top idx of each stack
  *  int[] stackData - values in the stack
  *  int[] nextIndex - to keep next index (for put method) OR prev index (for pop method)
  *  int nextAvailable - to mark next index
+ *  
+ * [Note]
+ * 1) N = 1
+ *    use 1 pointer to mark stack top.
+ *    
+ * 2) N = 2
+ *     i.  split by half -> would waste empty space.
+ *     ii. place pointers at both ends.
+ *     
+ * 3) N = 3+
+ *    need to keep track of next available idx(to put OR to revert when popping) 
+ *    using 1 variable and 1 array
+ *    
+ *    1 array of length n. to keep top's idx for each stack.
+ *    
+ *    1 array of length capacity. to keep real data.
  * 
  * @author Sunny Park
  *
