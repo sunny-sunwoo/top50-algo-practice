@@ -59,11 +59,11 @@ public class Q13_Nstacks {
     }
     
     public int pop(int n) {
-        int next = nextAvailable;
-        nextAvailable = topOfStack[n];
-        int toReturn = stackData[topOfStack[n]];
-        nextIndex[next] = nextAvailable;
-        topOfStack[n] = nextIndex[topOfStack[n]];
+        int idx = topOfStack[n];
+        int toReturn = stackData[idx];
+        topOfStack[n] = nextIndex[idx]; 
+        nextIndex[idx] = nextAvailable;
+        nextAvailable = idx;
         printStatus();
         return toReturn;
     }
@@ -84,6 +84,8 @@ public class Q13_Nstacks {
         System.out.println("POP: " + stack.pop(0));
         stack.put(1, 8);
         System.out.println("POP: " + stack.pop(1));
-//        stack.put(1, 9);
+        stack.put(1, 9);
+        stack.put(1, 10);
+        System.out.println("POP: " + stack.pop(1));
     }
 }
